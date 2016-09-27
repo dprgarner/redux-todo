@@ -6,8 +6,12 @@ module.exports = {
   },
 
   output: {
-      path: path.resolve(__dirname, "build"),
-      publicPath: "/",
-      filename: 'frontend.bundle.js'
-  }
+    path: path.resolve(__dirname, "build"),
+    publicPath: "/",
+    filename: 'frontend.bundle.js'
+  },
+
+  devServer: {
+    inline: true,
+  },
 };
