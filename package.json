@@ -13,14 +13,20 @@
     "karma-mocha": "^1.1.1",
     "karma-mocha-reporter": "^2.2.0",
     "karma-phantomjs-launcher": "^1.0.2",
+    "karma-webpack": "^1.8.0",
     "mocha": "^3.0.2",
-    "phantomjs-prebuilt": "^2.1.12"
+    "phantomjs-prebuilt": "^2.1.12",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "karma start karma.conf.js",
-    "watchtest": "karma start karma_watch.conf.js"
+    "watchtest": "karma start karma_watch.conf.js",
+    "build": "webpack --config=webpack.conf.js",
+    "start": "webpack-dev-server --content-base build/ --config=webpack.conf.js"
   },
+  "readme": "To run the live-reloading server, run start and go to `http://localhost:8080/webpack-dev-server/index.html`. This builds frontend.bundle.js *in the cache* and not in the build directory whenever the source javascript is changed.",
   "author": "",
   "license": "ISC"
 }
