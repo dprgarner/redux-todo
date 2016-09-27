@@ -1,5 +1,3 @@
-module.exports = function globallyAvailable(lol) {
-  return lol + 1;
-};
+export default lol => lol + 1;
 
 console.log('Loaded!');
