@@ -1,6 +1,6 @@
 import app from '.';
 
-describe('babel', function () {
+describe('base app', function () {
   it('adds a button', function () {
     expect($('button')).to.have.length(0);
     app();
