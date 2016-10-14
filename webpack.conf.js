@@ -1,8 +1,9 @@
 var path = require("path");
+var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: ["./src/index.js"],
+    app: ["./src/start.js"],
   },
 
   output: {
@@ -27,4 +28,11 @@ module.exports = {
       }
     ],
   },
+
+  plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    })
+  ],
 };
