@@ -1,6 +1,12 @@
-export default function reducer(state, action) {
-  return {...state, todos: [
-    ...state.todos,
-    {id: state.todos.length, text: action.text}
-  ]};
+const initialState = {
+  todos: [],
+};
+
+export default function reducer(state=initialState, action) {
+  let todos = [...state.todos];
+  switch (action.type) {
+    case 'ADD_TODO':
+      todos.push({id: state.todos.length, text: action.text});
+  }
+  return {...state, todos};
 }

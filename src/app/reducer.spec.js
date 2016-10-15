@@ -3,7 +3,7 @@ import deepFreeze from 'deep-freeze';
 import reducer from './reducer';
 
 describe('reducer', function () {
-  it('can add a todo', function () {
+  it('can add a todo to an empty list', function () {
     let state = {todos: []};
     let action = {
       type: 'ADD_TODO',
@@ -19,7 +19,7 @@ describe('reducer', function () {
     });
   });
 
-  it('can add two todos', function () {
+  it('can add a todo to a list with todos', function () {
     let state = {
       todos: [{
         id: 0,

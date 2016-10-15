@@ -1,2 +1,5 @@
-import app from './app/index';
-$(app);
+import app from './app';
+
+$(function () {
+  app('main');
+});
