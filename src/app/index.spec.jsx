@@ -5,7 +5,7 @@ import {mount} from 'enzyme';
 import App from '.';
 import reducer from './reducer';
 
-describe('base app', function () {
+describe('App', function () {
   beforeEach(function () {
     let store = createStore(reducer);
 
