@@ -2,7 +2,7 @@ const initialState = {
   todos: [],
 };
 
-export default function reducer(state=initialState, action) {
+export default function reducer(state=initialState, action={}) {
   let todos = [...state.todos];
   switch (action.type) {
     case 'ADD_TODO':

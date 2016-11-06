@@ -1,5 +1,17 @@
-import app from './app';
+import {render} from 'react-dom'
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 
-$(function () {
-  app('main');
-});
+import App from './app';
+import reducer from './app/reducer';
+
+window.onload = () => {
+  let store = createStore(reducer);
+
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    $('body')[0]
+  );
+};
