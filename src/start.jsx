@@ -12,6 +12,6 @@ window.onload = () => {
     <Provider store={store}>
       <App />
     </Provider>,
-    document.body
+    document.getElementsByTagName('main')[0]
   );
 };

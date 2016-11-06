@@ -1,12 +1,14 @@
 import {connect} from 'react-redux';
 
+import {addTodo} from './actions';
+
 const AddTodo = ({dispatch}) => {
   let input;
 
   function onSubmit(e) {
     e.preventDefault();
     if (input.value.trim()) {
-      dispatch({type: 'ADD_TODO', text: input.value});
+      dispatch(addTodo(input.value));
       input.value = '';
     }
   }

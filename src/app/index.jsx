@@ -2,10 +2,10 @@ import AddTodo from './AddTodo';
 import Todos from './Todos';
 
 const App = () => (
-  <main>
+  <div>
     <AddTodo />
     <Todos />
-  </main>
+  </div>
 );
 
 export default App;
