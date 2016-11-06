@@ -40,7 +40,19 @@ describe('App', function () {
     this.input.value = '      ';
     this.button.click();
 
-    expect(this.app.find('li')).to.have.length(0);
+    expect(this.getTodos()).to.have.length(0);
     expect(this.input.value).to.not.equal('');
+  });
+
+  it('toggles todos on click', function () {
+    this.input.value = 'Hello world!';
+    this.button.click();
+    let todo = this.getTodos();
+
+    todo.simulate('click');
+    expect(todo.prop('style')).to.include.keys('textDecoration');
+
+    todo.simulate('click');
+    expect(todo.prop('style')).to.not.include.keys('textDecoration');
   });
 });

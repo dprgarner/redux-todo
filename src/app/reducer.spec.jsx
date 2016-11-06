@@ -15,6 +15,7 @@ describe('reducer', function () {
       todos: [{
         id: 0,
         text: 'hi',
+        active: true,
       }]
     });
   });
@@ -24,6 +25,7 @@ describe('reducer', function () {
       todos: [{
         id: 0,
         text: 'hi',
+        active: true,
       }],
     };
     let action = {
@@ -36,9 +38,73 @@ describe('reducer', function () {
       todos: [{
         id: 0,
         text: 'hi',
+        active: true,
       }, {
         id: 1,
         text: 'bi',
+        active: true,
+      }],
+    });
+  });
+
+  it('can toggle a todo on', function () {
+    let state = {
+      todos: [{
+        id: 0,
+        text: 'hi',
+        active: true,
+      }, {
+        id: 1,
+        text: 'bi',
+        active: false,
+      }],
+    };
+    let action = {
+      type: 'TOGGLE_TODO',
+      id: 1,
+    };
+    deepFreeze(state);
+
+    expect(reducer(state, action)).to.deep.equal({
+      todos: [{
+        id: 0,
+        text: 'hi',
+        active: true,
+      }, {
+        id: 1,
+        text: 'bi',
+        active: true,
+      }],
+    });
+  });
+
+  it('can toggle a todo off', function () {
+    let state = {
+      todos: [{
+        id: 0,
+        text: 'hi',
+        active: true,
+      }, {
+        id: 1,
+        text: 'bi',
+        active: false,
+      }],
+    };
+    let action = {
+      type: 'TOGGLE_TODO',
+      id: 0,
+    };
+    deepFreeze(state);
+
+    expect(reducer(state, action)).to.deep.equal({
+      todos: [{
+        id: 0,
+        text: 'hi',
+        active: false,
+      }, {
+        id: 1,
+        text: 'bi',
+        active: false,
       }],
     });
   });

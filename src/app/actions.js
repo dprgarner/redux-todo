@@ -1,6 +1,11 @@
 const addTodo = (text) => ({
   type: 'ADD_TODO',
-  text: text,
+  text,
 });
 
-export {addTodo};
+const toggleTodo = (id) => ({
+  type: 'TOGGLE_TODO',
+  id,
+});
+
+export {addTodo, toggleTodo};
