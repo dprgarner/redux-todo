@@ -12,6 +12,6 @@ window.onload = () => {
     <Provider store={store}>
       <App />
     </Provider>,
-    $('body')[0]
+    document.body
   );
 };
