@@ -36,7 +36,7 @@ describe('base app', function () {
     expect(this.input.value).to.equal('');
   });
 
-  it('only submits when there are non-whitespace chars in text box', function () {
+  it('does not submit whitespace', function () {
     this.input.value = '      ';
     this.button.simulate('click');
 

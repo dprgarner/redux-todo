@@ -5,7 +5,7 @@ var webpack = require('webpack');
 
 var baseConfig = {
   entry: {
-    app: ['./src/start.js'],
+    app: ['./src/start'],
   },
 
   output: {
@@ -21,6 +21,14 @@ var baseConfig = {
         exclude: /node_modules/,
         loader: 'babel', // 'babel-loader' is also a valid name to reference
         query: {
+          presets: ['es2015', 'stage-2']
+        },
+      },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
           presets: ['react', 'es2015', 'stage-2']
         },
       },
@@ -32,6 +40,10 @@ var baseConfig = {
       React: 'react',
     }),
   ],
+
+  resolve: {
+      extensions: ['', '.js', '.jsx']
+  }
 };
 
 exports.devServer = function (port) {
