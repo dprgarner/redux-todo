@@ -1,9 +1,10 @@
 import {connect} from 'react-redux';
 
 const AddTodo = ({dispatch}) => {
-  let input = '';
+  let input;
 
-  function onTodoClick() {
+  function onSubmit(e) {
+    e.preventDefault();
     if (input.value.trim()) {
       dispatch({type: 'ADD_TODO', text: input.value});
       input.value = '';
@@ -11,10 +12,10 @@ const AddTodo = ({dispatch}) => {
   }
 
   return (
-    <div>
-      <input type="text" ref={node => {input = node}}></input>
-      <button onClick={onTodoClick}>Add!</button>
-    </div>
+    <form onSubmit={onSubmit}>
+      <input type="text" ref={node => {input = node}} />
+      <button type="submit">Add!</button>
+    </form>
   );
 };
 

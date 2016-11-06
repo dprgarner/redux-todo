@@ -14,8 +14,8 @@ describe('App', function () {
         <App />
       </Provider>
     );
-    this.input = this.app.find('input').get(0);
-    this.button = this.app.find('button');
+    this.input = this.app.find('input[type="text"]').get(0);
+    this.button = this.app.find('button').get(0);
     this.getTodos = () => this.app.find('li');
 
     expect(this.getTodos()).to.have.length(0);
@@ -23,7 +23,7 @@ describe('App', function () {
 
   it('adds todos when the button is clicked', function () {
     this.input.value = 'Hello world!';
-    this.button.simulate('click');
+    this.button.click();
 
     expect(this.getTodos()).to.have.length(1);
     expect(this.getTodos().text()).to.equal('Hello world!');
@@ -31,14 +31,14 @@ describe('App', function () {
 
   it('clears the text box when the button is clicked', function () {
     this.input.value = 'Hello world!';
-    this.button.simulate('click');
+    this.button.click();
 
     expect(this.input.value).to.equal('');
   });
 
   it('does not submit whitespace', function () {
     this.input.value = '      ';
-    this.button.simulate('click');
+    this.button.click();
 
     expect(this.app.find('li')).to.have.length(0);
     expect(this.input.value).to.not.equal('');
