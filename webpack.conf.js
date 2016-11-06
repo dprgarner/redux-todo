@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
     publicPath: "/",
-    filename: 'frontend.bundle.js'
+    filename: 'frontend.bundle.js',
   },
 
   devServer: {
@@ -23,16 +23,16 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel', // 'babel-loader' is also a valid name to reference
         query: {
-          presets: ['es2015', 'stage-2']
-        }
-      }
+          presets: ['react', 'es2015', 'stage-2']
+        },
+      },
     ],
   },
 
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
-      jQuery: 'jquery'
-    })
+      jQuery: 'jquery',
+    }),
   ],
 };
