@@ -1,12 +1,14 @@
 import deepFreeze from 'deep-freeze';
 
-import {addTodo, toggleTodo} from './actions';
 import reducer from './reducer';
 
 describe('reducer', function () {
   it('can add a todo to an empty list', function () {
     let state = {todos: []};
-    let action = addTodo('hi');
+    let action = {
+      type: 'ADD_TODO',
+      text: 'hi',
+    };
     deepFreeze(state);
 
     expect(reducer(state, action)).to.deep.equal({
@@ -26,7 +28,10 @@ describe('reducer', function () {
         active: true,
       }],
     };
-    let action = addTodo('bi');
+    let action = {
+      type: 'ADD_TODO',
+      text: 'bi',
+    };
     deepFreeze(state);
 
     expect(reducer(state, action)).to.deep.equal({
@@ -54,7 +59,10 @@ describe('reducer', function () {
         active: false,
       }],
     };
-    let action = toggleTodo(1);
+    let action = {
+      type: 'TOGGLE_TODO',
+      id: 1,
+    };
     deepFreeze(state);
 
     expect(reducer(state, action)).to.deep.equal({
@@ -82,7 +90,10 @@ describe('reducer', function () {
         active: false,
       }],
     };
-    let action = toggleTodo(0);
+    let action = {
+      type: 'TOGGLE_TODO',
+      id: 0,
+    };
     deepFreeze(state);
 
     expect(reducer(state, action)).to.deep.equal({
