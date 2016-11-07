@@ -33,7 +33,6 @@
   "scripts": {
     "test": "karma start karma.conf.js",
     "watchtest": "karma start karma_watch.conf.js",
-    "build": "webpack --config=webpack.conf.js",
     "start": "node webpack_dev_server.js"
   },
   "author": "",

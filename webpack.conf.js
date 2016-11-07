@@ -17,21 +17,10 @@ var baseConfig = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel', // 'babel-loader' is also a valid name to reference
-        query: {
-          presets: ['es2015', 'stage-2']
-        },
-      },
-      {
-        test: /\.jsx$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
-        query: {
-          presets: ['react', 'es2015', 'stage-2']
-        },
-      },
+      }
     ],
   },
 
@@ -42,7 +31,7 @@ var baseConfig = {
   ],
 
   resolve: {
-      extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   }
 };
 
