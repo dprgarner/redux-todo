@@ -7,19 +7,23 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onTodoClick: (id) => {dispatch(toggleTodo(id))},
-})
+});
 
-const Todo = ({text, onClick, active}) => {
+export const Todo = ({text, onClick, active}) => {
   let style = !active ? {textDecoration: 'line-through'} : {};
   return (
     <li onClick={onClick} style={style}>{text}</li>
   )
-}
+};
 
 const Todos = ({todos, onTodoClick}) => (
   <ul>
     {todos.map((todo) =>
-      <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
+      <Todo
+        key={todo.id}
+        onClick={() => onTodoClick(todo.id)}
+        {...todo}
+      />
     )}
   </ul>
 );

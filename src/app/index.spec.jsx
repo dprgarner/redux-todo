@@ -3,6 +3,7 @@ import {Provider} from 'react-redux';
 import {mount} from 'enzyme';
 
 import App from '.';
+import {Todo} from './Todos'
 import reducer from './reducer';
 
 describe('App', function () {
@@ -16,7 +17,7 @@ describe('App', function () {
     );
     this.input = this.app.find('input[type="text"]').get(0);
     this.button = this.app.find('button').get(0);
-    this.getTodos = () => this.app.find('li');
+    this.getTodos = () => this.app.find(Todo);
 
     expect(this.getTodos()).to.have.length(0);
   });
@@ -48,11 +49,12 @@ describe('App', function () {
     this.input.value = 'Hello world!';
     this.button.click();
     let todo = this.getTodos();
+    expect(todo.prop('active')).to.be.true;
 
     todo.simulate('click');
-    expect(todo.prop('style')).to.include.keys('textDecoration');
+    expect(todo.prop('active')).to.be.false;
 
     todo.simulate('click');
-    expect(todo.prop('style')).to.not.include.keys('textDecoration');
+    expect(todo.prop('active')).to.be.true;
   });
 });
