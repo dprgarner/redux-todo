@@ -16,23 +16,27 @@ let filters = {
     text: 'Complete',
     action: filterComplete,
   },
-}
+};
 
-const FilterTodos = ({dispatch}) => {
-  let ulStyle = {listStyle: 'none', padding: 0};
+let FilterTodo = ({dispatch, text, action}) => {
   let liStyle = {display: 'inline-block', marginRight: '20px'};
 
   return (
-    <ul style={ulStyle}>
-      {
-        _.map(filters, (value, key) => (
-          <li key={key} style={liStyle} onClick={() => {dispatch(value.action())}}>
-            {value.text}
-          </li>
-        ))
-      }
-    </ul>
+    <li style={liStyle} onClick={() => {dispatch(action())}}>
+      {text}
+    </li>
   )
 };
+FilterTodo = connect()(FilterTodo);
 
-export default connect()(FilterTodos);
+const FilterTodos = () => (
+  <ul style={{listStyle: 'none', padding: 0}}>
+    {
+      _.map(filters, (value, key) => (
+        <FilterTodo key={key} {...value} />
+      ))
+    }
+  </ul>
+);
+
+export default FilterTodos;
