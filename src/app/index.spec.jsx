@@ -63,13 +63,13 @@ describe('App', function () {
       this.button.click();
 
       let todo = this.getTodos();
-      expect(todo.prop('active')).to.be.true;
+      expect(todo.prop('completed')).to.be.false;
 
       todo.simulate('click');
-      expect(todo.prop('active')).to.be.false;
+      expect(todo.prop('completed')).to.be.true;
 
       todo.simulate('click');
-      expect(todo.prop('active')).to.be.true;
+      expect(todo.prop('completed')).to.be.false;
     });
   });
 

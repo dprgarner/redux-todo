@@ -1,21 +1,23 @@
 import _ from 'lodash';
 import {combineReducers} from 'redux';
 
-export const filter = (state='ALL', action) => (
-  (action.type === 'SET_FILTER') ? action.filter : state
+import {ADD_TODO, TOGGLE_TODO, SET_FILTER, FILTER_ALL} from './constants';
+
+export const filter = (state=FILTER_ALL, action) => (
+  (action.type === SET_FILTER) ? action.filter : state
 );
 
 export function todos(state=[], action) {
   switch (action.type) {
-    case 'ADD_TODO':
+    case ADD_TODO:
       return [...state, {
         id: state.length,
         text: action.text,
-        active: true,
+        completed: false,
       }];
-    case 'TOGGLE_TODO':
+    case TOGGLE_TODO:
       return _.map(state, (todo) => (
-        (todo.id === action.id) ? {...todo, active: !todo.active} : todo
+        (todo.id === action.id) ? {...todo, completed: !todo.completed} : todo
       ));
   }
   return state;

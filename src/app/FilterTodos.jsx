@@ -2,20 +2,21 @@ import _ from 'lodash';
 import {connect} from 'react-redux';
 
 import {filterAll, filterIncomplete, filterComplete} from './actions';
+import {FILTER_ALL, FILTER_INCOMPLETE, FILTER_COMPLETE} from './constants';
 
 let filters = [
   {
-    type: 'ALL',
+    type: FILTER_ALL,
     text: 'All',
     action: filterAll,
   },
   {
-    type: 'INCOMPLETE',
+    type: FILTER_INCOMPLETE,
     text: 'Incomplete',
     action: filterIncomplete,
   },
   {
-    type: 'COMPLETE',
+    type: FILTER_COMPLETE,
     text: 'Complete',
     action: filterComplete,
   },

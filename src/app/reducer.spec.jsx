@@ -1,6 +1,7 @@
 import deepFreeze from 'deep-freeze';
 
 import * as actions from './actions'
+import {FILTER_ALL, FILTER_INCOMPLETE, FILTER_COMPLETE} from './constants';
 import reducer, {todos, filter} from './reducer';
 
 function todoReducer(test, action, initialState, finalState) {
@@ -28,7 +29,7 @@ describe('reducer', () => {
         {
           id: 0,
           text: 'hi',
-          active: true,
+          completed: false,
         },
       ]
     );
@@ -40,19 +41,19 @@ describe('reducer', () => {
         {
           id: 0,
           text: 'hi',
-          active: true,
+          completed: false,
         },
       ],
       [
         {
           id: 0,
           text: 'hi',
-          active: true,
+          completed: false,
         },
         {
           id: 1,
           text: 'bi',
-          active: true,
+          completed: false,
         },
       ],
     )
@@ -66,24 +67,24 @@ describe('reducer', () => {
         {
           id: 0,
           text: 'hi',
-          active: true,
+          completed: false,
         },
         {
           id: 1,
           text: 'bi',
-          active: false,
+          completed: true,
         },
       ],
       [
         {
           id: 0,
           text: 'hi',
-          active: true,
+          completed: false,
         },
         {
           id: 1,
           text: 'bi',
-          active: true,
+          completed: false,
         },
       ],
     );
@@ -95,24 +96,24 @@ describe('reducer', () => {
         {
           id: 0,
           text: 'hi',
-          active: true,
+          completed: false,
         },
         {
           id: 1,
           text: 'bi',
-          active: false,
+          completed: true,
         },
       ],
       [
         {
           id: 0,
           text: 'hi',
-          active: false,
+          completed: true,
         },
         {
           id: 1,
           text: 'bi',
-          active: false,
+          completed: true,
         },
       ],
     );
@@ -122,22 +123,22 @@ describe('reducer', () => {
     filterReducer(
       'switches the filter state to show all',
       actions.filterAll(),
-      'INCOMPLETE',
-      'ALL',
+      FILTER_INCOMPLETE,
+      FILTER_ALL,
     );
 
     filterReducer(
       'switches the filter state to show incomplete',
       actions.filterIncomplete(),
-      'ALL',
-      'INCOMPLETE',
+      FILTER_ALL,
+      FILTER_INCOMPLETE,
     );
 
     filterReducer(
       'switches the filter state to show complete',
       actions.filterComplete(),
-      'ALL',
-      'COMPLETE',
+      FILTER_ALL,
+      FILTER_COMPLETE,
     );
   })
 });

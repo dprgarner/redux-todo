@@ -7,8 +7,8 @@ const mapDispatchToProps = (dispatch) => ({
   onTodoClick: (id) => {dispatch(toggleTodo(id))},
 });
 
-export const Todo = ({text, onClick, active}) => {
-  let style = !active ? {textDecoration: 'line-through'} : {};
+export const Todo = ({text, onClick, completed}) => {
+  let style = completed ? {textDecoration: 'line-through'} : {};
   return (
     <li onClick={onClick} style={style}>{text}</li>
   )
@@ -19,8 +19,8 @@ const Todos = ({filter, todos, onTodoClick}) => (
     {
       todos.filter((todo) => (
         filter === 'ALL'
-        || todo.active && filter === 'INCOMPLETE'
-        || !todo.active && filter === 'COMPLETE'
+        || todo.completed && filter === 'COMPLETE'
+        || !todo.completed && filter === 'INCOMPLETE'
       )).map((todo) =>
         <Todo
           key={todo.id}

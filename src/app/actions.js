@@ -1,26 +1,35 @@
+import {
+  ADD_TODO,
+  TOGGLE_TODO,
+  SET_FILTER,
+  FILTER_ALL,
+  FILTER_INCOMPLETE,
+  FILTER_COMPLETE,
+} from './constants';
+
 const addTodo = (text) => ({
-  type: 'ADD_TODO',
+  type: ADD_TODO,
   text,
 });
 
 const toggleTodo = (id) => ({
-  type: 'TOGGLE_TODO',
+  type: TOGGLE_TODO,
   id,
 });
 
 const filterAll = () => ({
-  type: 'SET_FILTER',
-  filter: 'ALL',
+  type: SET_FILTER,
+  filter: FILTER_ALL,
 });
 
 const filterIncomplete = () => ({
-  type: 'SET_FILTER',
-  filter: 'INCOMPLETE',
+  type: SET_FILTER,
+  filter: FILTER_INCOMPLETE,
 });
 
 const filterComplete = () => ({
-  type: 'SET_FILTER',
-  filter: 'COMPLETE',
+  type: SET_FILTER,
+  filter: FILTER_COMPLETE,
 });
 
 export {addTodo, toggleTodo, filterAll, filterIncomplete, filterComplete};
