@@ -19,7 +19,7 @@ describe('reducer', () => {
       actions.addTodo('hi'),
       {
         filter: 'ALL',
-        todos: []
+        todos: [],
       },
       {
         filter: 'ALL',
