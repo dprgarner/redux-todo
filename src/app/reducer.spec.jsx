@@ -17,8 +17,12 @@ describe('reducer', () => {
     theReducer(
       'adds a todo to an empty list',
       actions.addTodo('hi'),
-      {todos: []},
       {
+        filter: 'ALL',
+        todos: []
+      },
+      {
+        filter: 'ALL',
         todos: [
           {
             id: 0,
@@ -33,6 +37,7 @@ describe('reducer', () => {
       'adds a todo to a list with todos',
       actions.addTodo('bi'),
       {
+        filter: 'ALL',
         todos: [
           {
             id: 0,
@@ -42,6 +47,7 @@ describe('reducer', () => {
         ],
       },
       {
+        filter: 'ALL',
         todos: [
           {
             id: 0,
@@ -63,6 +69,7 @@ describe('reducer', () => {
       'toggles a todo on',
       actions.toggleTodo(1),
       {
+        filter: 'ALL',
         todos: [
           {
             id: 0,
@@ -77,6 +84,7 @@ describe('reducer', () => {
         ],
       },
       {
+        filter: 'ALL',
         todos: [
           {
             id: 0,
@@ -96,6 +104,7 @@ describe('reducer', () => {
       'toggles a todo off', 
       actions.toggleTodo(0),
       {
+        filter: 'ALL',
         todos: [
           {
             id: 0,
@@ -110,6 +119,7 @@ describe('reducer', () => {
         ],
       },
       {
+        filter: 'ALL',
         todos: [
           {
             id: 0,
@@ -125,4 +135,45 @@ describe('reducer', () => {
       }
     );
   });
+
+  describe('FilterTodo', () => {
+    theReducer(
+      'switches the filter state to show all',
+      actions.filterAll(),
+      {
+        filter: 'INCOMPLETE',
+        todos: [],
+      },
+      {
+        filter: 'ALL',
+        todos: [],
+      }
+    );
+
+    theReducer(
+      'switches the filter state to show incomplete',
+      actions.filterIncomplete(),
+      {
+        filter: 'ALL',
+        todos: [],
+      },
+      {
+        filter: 'INCOMPLETE',
+        todos: [],
+      }
+    );
+
+    theReducer(
+      'switches the filter state to show complete',
+      actions.filterComplete(),
+      {
+        filter: 'ALL',
+        todos: [],
+      },
+      {
+        filter: 'COMPLETE',
+        todos: [],
+      }
+    );
+  })
 });

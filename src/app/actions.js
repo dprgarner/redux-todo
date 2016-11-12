@@ -8,4 +8,19 @@ const toggleTodo = (id) => ({
   id,
 });
 
-export {addTodo, toggleTodo};
+const filterAll = () => ({
+  type: 'FILTER_TODO',
+  filter: 'ALL',
+});
+
+const filterIncomplete = () => ({
+  type: 'FILTER_TODO',
+  filter: 'INCOMPLETE',
+});
+
+const filterComplete = () => ({
+  type: 'FILTER_TODO',
+  filter: 'COMPLETE',
+});
+
+export {addTodo, toggleTodo, filterAll, filterIncomplete, filterComplete};

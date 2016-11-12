@@ -4,6 +4,7 @@ import {mount} from 'enzyme';
 
 import App from '.';
 import {Todo} from './Todos'
+import FilterTodos from './FilterTodos'
 import reducer from './reducer';
 
 describe('App', function () {
@@ -19,9 +20,10 @@ describe('App', function () {
     this.button = this.app.find('button').get(0);
     this.getTodos = () => this.app.find(Todo);
 
-    this.all = this.app.find('li').get(0);
-    this.incomplete = this.app.find('li').get(1);
-    this.complete = this.app.find('li').get(2);
+    let filterTodos = this.app.find(FilterTodos);
+    this.all = filterTodos.find('li').at(0);
+    this.incomplete = filterTodos.find('li').at(1);
+    this.complete = filterTodos.find('li').at(2);
 
     expect(this.getTodos()).to.have.length(0);
   });
@@ -68,17 +70,45 @@ describe('App', function () {
   });
 
   describe('FilterTodos', function () {
-    it.skip('filters to incomplete todos', function () {
+    it('filters to incomplete todos', function () {
       this.input.value = 'Done!';
       this.button.click();
       this.getTodos().simulate('click');
-
       this.input.value = 'Not Done!';
       this.button.click();
 
-      this.incomplete.click()
+      this.incomplete.simulate('click');
 
+      expect(this.getTodos()).to.have.length(1);
       expect(this.getTodos().at(0).text()).to.equal('Not Done!');
+    });
+
+    it('filters to complete todos', function () {
+      this.input.value = 'Done!';
+      this.button.click();
+      this.getTodos().simulate('click');
+      this.input.value = 'Not Done!';
+      this.button.click();
+
+      this.complete.simulate('click');
+
+      expect(this.getTodos()).to.have.length(1);
+      expect(this.getTodos().at(0).text()).to.equal('Done!');
+    });
+
+    it('filters to all todos', function () {
+      this.input.value = 'Done!';
+      this.button.click();
+      this.getTodos().simulate('click');
+      this.input.value = 'Not Done!';
+      this.button.click();
+
+      this.complete.simulate('click');
+      this.all.simulate('click');
+
+      expect(this.getTodos()).to.have.length(2);
+      expect(this.getTodos().at(0).text()).to.equal('Done!');
+      expect(this.getTodos().at(1).text()).to.equal('Not Done!');
     });
   });
 });
