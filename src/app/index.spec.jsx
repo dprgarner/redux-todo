@@ -22,39 +22,44 @@ describe('App', function () {
     expect(this.getTodos()).to.have.length(0);
   });
 
-  it('adds todos when the button is clicked', function () {
-    this.input.value = 'Hello world!';
-    this.button.click();
+  describe('AddTodo', () => {
+    it('adds todos when the button is clicked', function () {
+      this.input.value = 'Hello world!';
+      this.button.click();
 
-    expect(this.getTodos()).to.have.length(1);
-    expect(this.getTodos().text()).to.equal('Hello world!');
+      expect(this.getTodos()).to.have.length(1);
+      expect(this.getTodos().text()).to.equal('Hello world!');
+    });
+
+    it('clears the text box when the button is clicked', function () {
+      this.input.value = 'Hello world!';
+      this.button.click();
+
+      expect(this.input.value).to.equal('');
+    });
+
+    it('does not submit whitespace', function () {
+      this.input.value = '      ';
+      this.button.click();
+
+      expect(this.getTodos()).to.have.length(0);
+      expect(this.input.value).to.not.equal('');
+    });
   });
 
-  it('clears the text box when the button is clicked', function () {
-    this.input.value = 'Hello world!';
-    this.button.click();
+  describe('Toggle', function () {
+    it('toggles todos on click', function () {
+      this.input.value = 'Hello world!';
+      this.button.click();
 
-    expect(this.input.value).to.equal('');
-  });
+      let todo = this.getTodos();
+      expect(todo.prop('active')).to.be.true;
 
-  it('does not submit whitespace', function () {
-    this.input.value = '      ';
-    this.button.click();
+      todo.simulate('click');
+      expect(todo.prop('active')).to.be.false;
 
-    expect(this.getTodos()).to.have.length(0);
-    expect(this.input.value).to.not.equal('');
-  });
-
-  it('toggles todos on click', function () {
-    this.input.value = 'Hello world!';
-    this.button.click();
-    let todo = this.getTodos();
-    expect(todo.prop('active')).to.be.true;
-
-    todo.simulate('click');
-    expect(todo.prop('active')).to.be.false;
-
-    todo.simulate('click');
-    expect(todo.prop('active')).to.be.true;
+      todo.simulate('click');
+      expect(todo.prop('active')).to.be.true;
+    });
   });
 });
