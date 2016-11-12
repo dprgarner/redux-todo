@@ -3,23 +3,34 @@ import {connect} from 'react-redux';
 
 import {filterAll, filterIncomplete, filterComplete} from './actions';
 
-let filters = {
-  'ALL': {
+let filters = [
+  {
+    type: 'ALL',
     text: 'All',
     action: filterAll,
   },
-  'INCOMPLETE': {
+  {
+    type: 'INCOMPLETE',
     text: 'Incomplete',
     action: filterIncomplete,
   },
-  'COMPLETE': {
+  {
+    type: 'COMPLETE',
     text: 'Complete',
     action: filterComplete,
   },
-};
+];
 
-let FilterTodo = ({dispatch, text, action}) => {
-  let liStyle = {display: 'inline-block', marginRight: '20px'};
+const mapStateToProps = (state, ownProps) => ({
+  selected: state.filter === ownProps.type,
+});
+
+let FilterTodo = ({dispatch, text, action, selected}) => {
+  let liStyle = {
+    display: 'inline-block',
+    marginRight: '20px',
+  };
+  if (selected) liStyle.textDecoration = 'underline';
 
   return (
     <li style={liStyle} onClick={() => {dispatch(action())}}>
@@ -27,13 +38,13 @@ let FilterTodo = ({dispatch, text, action}) => {
     </li>
   )
 };
-FilterTodo = connect()(FilterTodo);
+FilterTodo = connect(mapStateToProps)(FilterTodo);
 
 const FilterTodos = () => (
   <ul style={{listStyle: 'none', padding: 0}}>
     {
-      _.map(filters, (value, key) => (
-        <FilterTodo key={key} {...value} />
+      _.map(filters, (filter) => (
+        <FilterTodo key={filter.type} {...filter} />
       ))
     }
   </ul>

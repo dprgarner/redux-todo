@@ -25,6 +25,10 @@ describe('App', function () {
     this.incomplete = filterTodos.find('li').at(1);
     this.complete = filterTodos.find('li').at(2);
 
+    this.isSelected = (el) => (
+      el.props().style.textDecoration === 'underline'
+    );
+
     expect(this.getTodos()).to.have.length(0);
   });
 
@@ -81,6 +85,9 @@ describe('App', function () {
 
       expect(this.getTodos()).to.have.length(1);
       expect(this.getTodos().at(0).text()).to.equal('Not Done!');
+
+      expect(this.isSelected(this.all)).to.be.false;
+      expect(this.isSelected(this.incomplete)).to.be.true;
     });
 
     it('filters to complete todos', function () {
@@ -94,6 +101,8 @@ describe('App', function () {
 
       expect(this.getTodos()).to.have.length(1);
       expect(this.getTodos().at(0).text()).to.equal('Done!');
+      expect(this.isSelected(this.all)).to.be.false;
+      expect(this.isSelected(this.complete)).to.be.true;
     });
 
     it('filters to all todos', function () {
@@ -109,6 +118,9 @@ describe('App', function () {
       expect(this.getTodos()).to.have.length(2);
       expect(this.getTodos().at(0).text()).to.equal('Done!');
       expect(this.getTodos().at(1).text()).to.equal('Not Done!');
+      expect(this.isSelected(this.all)).to.be.true;
+      expect(this.isSelected(this.complete)).to.be.false;
+      expect(this.isSelected(this.incomplete)).to.be.false;
     });
   });
 });

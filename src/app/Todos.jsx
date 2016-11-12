@@ -16,17 +16,19 @@ export const Todo = ({text, onClick, active}) => {
 
 const Todos = ({filter, todos, onTodoClick}) => (
   <ul>
-    {todos.filter((todo) => (
-      filter === 'ALL'
-      || todo.active && filter === 'INCOMPLETE'
-      || !todo.active && filter === 'COMPLETE'
-    )).map((todo) =>
-      <Todo
-        key={todo.id}
-        onClick={() => onTodoClick(todo.id)}
-        {...todo}
-      />
-    )}
+    {
+      todos.filter((todo) => (
+        filter === 'ALL'
+        || todo.active && filter === 'INCOMPLETE'
+        || !todo.active && filter === 'COMPLETE'
+      )).map((todo) =>
+        <Todo
+          key={todo.id}
+          onClick={() => onTodoClick(todo.id)}
+          {...todo}
+        />
+      )
+    }
   </ul>
 );
 
