@@ -9,17 +9,17 @@ const toggleTodo = (id) => ({
 });
 
 const filterAll = () => ({
-  type: 'FILTER_TODO',
+  type: 'SET_FILTER',
   filter: 'ALL',
 });
 
 const filterIncomplete = () => ({
-  type: 'FILTER_TODO',
+  type: 'SET_FILTER',
   filter: 'INCOMPLETE',
 });
 
 const filterComplete = () => ({
-  type: 'FILTER_TODO',
+  type: 'SET_FILTER',
   filter: 'COMPLETE',
 });
 
