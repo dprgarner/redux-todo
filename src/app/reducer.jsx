@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import {combineReducers} from 'redux';
 
-const filter = (state='ALL', action) => (
+export const filter = (state='ALL', action) => (
   (action.type === 'SET_FILTER') ? action.filter : state
 );
 
-function todos(state=[], action) {
+export function todos(state=[], action) {
   switch (action.type) {
     case 'ADD_TODO':
       return [...state, {
@@ -21,7 +21,4 @@ function todos(state=[], action) {
   return state;
 }
 
-export default combineReducers({
-  filter,
-  todos,
-});
+export default combineReducers({filter, todos});
