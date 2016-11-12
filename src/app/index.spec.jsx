@@ -19,6 +19,10 @@ describe('App', function () {
     this.button = this.app.find('button').get(0);
     this.getTodos = () => this.app.find(Todo);
 
+    this.all = this.app.find('li').get(0);
+    this.incomplete = this.app.find('li').get(1);
+    this.complete = this.app.find('li').get(2);
+
     expect(this.getTodos()).to.have.length(0);
   });
 
@@ -60,6 +64,21 @@ describe('App', function () {
 
       todo.simulate('click');
       expect(todo.prop('active')).to.be.true;
+    });
+  });
+
+  describe('FilterTodos', function () {
+    it.skip('filters to incomplete todos', function () {
+      this.input.value = 'Done!';
+      this.button.click();
+      this.getTodos().simulate('click');
+
+      this.input.value = 'Not Done!';
+      this.button.click();
+
+      this.incomplete.click()
+
+      expect(this.getTodos().at(0).text()).to.equal('Not Done!');
     });
   });
 });
