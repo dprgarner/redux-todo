@@ -29,12 +29,14 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "karma start karma.conf.js",
     "watchtest": "karma start karma_watch.conf.js",
     "start": "node webpack_dev_server.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "sinon": "^2.0.0-pre"
+  }
 }

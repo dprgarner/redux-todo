@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 
 import {addTodo} from './actions';
 
-const AddTodo = ({dispatch}) => {
+export const AddTodo = ({dispatch}) => {
   let input;
 
   function onSubmit(e) {

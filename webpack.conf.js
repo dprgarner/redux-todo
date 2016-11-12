@@ -20,7 +20,7 @@ var baseConfig = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel',
-      }
+      },
     ],
   },
 
@@ -31,7 +31,7 @@ var baseConfig = {
   ],
 
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
   }
 };
 

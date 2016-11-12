@@ -12,6 +12,7 @@ function todoReducer(test, action, initialState, finalState) {
     expect(todos(initialState, action)).to.deep.equal(finalState);
   });
 }
+
 function filterReducer(test, action, initialState, finalState) {
   it(test, () => {
     deepFreeze(action);
