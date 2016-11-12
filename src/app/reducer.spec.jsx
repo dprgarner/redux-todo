@@ -3,15 +3,22 @@ import deepFreeze from 'deep-freeze';
 import * as actions from './actions'
 import reducer from './reducer';
 
+function theReducer(test, action, initialState, finalState) {
+  it(test, () => {
+    deepFreeze(action);
+    deepFreeze(initialState);
+    deepFreeze(finalState);
+    expect(reducer(initialState, action)).to.deep.equal(finalState);
+  });
+}
+
 describe('reducer', () => {
   describe('addTodo', () => {
-    it('can add a todo to an empty list', () => {
-      let state = {todos: []};
-      let action = actions.addTodo('hi');
-      deepFreeze(state);
-      deepFreeze(action);
-
-      expect(reducer(state, action)).to.deep.equal({
+    theReducer(
+      'adds a todo to an empty list',
+      actions.addTodo('hi'),
+      {todos: []},
+      {
         todos: [
           {
             id: 0,
@@ -19,11 +26,13 @@ describe('reducer', () => {
             active: true,
           },
         ],
-      });
-    });
+      }
+    );
 
-    it('can add a todo to a list with todos', () => {
-      let state = {
+    theReducer(
+      'adds a todo to a list with todos',
+      actions.addTodo('bi'),
+      {
         todos: [
           {
             id: 0,
@@ -31,12 +40,8 @@ describe('reducer', () => {
             active: true,
           },
         ],
-      };
-      let action = actions.addTodo('bi');
-      deepFreeze(state);
-      deepFreeze(action);
-
-      expect(reducer(state, action)).to.deep.equal({
+      },
+      {
         todos: [
           {
             id: 0,
@@ -49,13 +54,15 @@ describe('reducer', () => {
             active: true,
           },
         ],
-      });
-    });
+      },
+    )
   });
 
   describe('toggleTodo', () => {
-    it('can toggle a todo on', () => {
-      let state = {
+    theReducer(
+      'toggles a todo on',
+      actions.toggleTodo(1),
+      {
         todos: [
           {
             id: 0,
@@ -68,29 +75,27 @@ describe('reducer', () => {
             active: false,
           },
         ],
-      };
-      let action = actions.toggleTodo(1);
-      deepFreeze(action);
-      deepFreeze(state);
+      },
+      {
+        todos: [
+          {
+            id: 0,
+            text: 'hi',
+            active: true,
+          },
+          {
+            id: 1,
+            text: 'bi',
+            active: true,
+          },
+        ],
+      }
+    );
 
-      expect(reducer(state, action)).to.deep.equal({
-        todos: [
-          {
-            id: 0,
-            text: 'hi',
-            active: true,
-          },
-          {
-            id: 1,
-            text: 'bi',
-            active: true,
-          },
-        ],
-      });
-    });
-
-    it('can toggle a todo off', () => {
-      let state = {
+    theReducer(
+      'toggles a todo off', 
+      actions.toggleTodo(0),
+      {
         todos: [
           {
             id: 0,
@@ -103,12 +108,8 @@ describe('reducer', () => {
             active: false,
           },
         ],
-      };
-      let action = actions.toggleTodo(0);
-      deepFreeze(state);
-      deepFreeze(action);
-
-      expect(reducer(state, action)).to.deep.equal({
+      },
+      {
         todos: [
           {
             id: 0,
@@ -121,7 +122,7 @@ describe('reducer', () => {
             active: false,
           },
         ],
-      });
-    });
+      }
+    );
   });
 });
