@@ -40,70 +40,49 @@ describe('App', function () {
     expect(this.getTodos().text()).to.equal('Hello world!');
   });
 
-  describe('Toggle', function () {
-    it('toggles todos on click', function () {
-      this.input.value = 'Hello world!';
-      this.button.click();
+  it('toggles todos on click', function () {
+    this.input.value = 'Hello world!';
+    this.button.click();
 
-      let todo = this.getTodos();
-      expect(todo.prop('completed')).to.be.false;
+    let todo = this.getTodos();
+    expect(todo.prop('completed')).to.be.false;
 
-      todo.simulate('click');
-      expect(todo.prop('completed')).to.be.true;
+    todo.simulate('click');
+    expect(todo.prop('completed')).to.be.true;
 
-      todo.simulate('click');
-      expect(todo.prop('completed')).to.be.false;
-    });
+    todo.simulate('click');
+    expect(todo.prop('completed')).to.be.false;
   });
 
-  describe('FilterTodos', function () {
-    it('filters to incomplete todos', function () {
-      this.input.value = 'Done!';
-      this.button.click();
-      this.getTodos().simulate('click');
-      this.input.value = 'Not Done!';
-      this.button.click();
+  it('filters todos based on whether they are completed', function () {
+    let visibleTodos = () => (
+      this.getTodos().map((todo) => todo.text())
+    );
 
-      this.incomplete.simulate('click');
+    this.input.value = 'Done!';
+    this.button.click();
+    this.getTodos().simulate('click');
+    this.input.value = 'Not Done!';
+    this.button.click();
 
-      expect(this.getTodos()).to.have.length(1);
-      expect(this.getTodos().at(0).text()).to.equal('Not Done!');
+    expect(visibleTodos()).to.deep.equal(['Done!', 'Not Done!']);
 
-      expect(this.isSelected(this.all)).to.be.false;
-      expect(this.isSelected(this.incomplete)).to.be.true;
-    });
+    this.incomplete.simulate('click');
+    expect(visibleTodos()).to.deep.equal(['Not Done!']);
+    expect(this.isSelected(this.all)).to.be.false;
+    expect(this.isSelected(this.incomplete)).to.be.true;
+    expect(this.isSelected(this.complete)).to.be.false;
 
-    it('filters to complete todos', function () {
-      this.input.value = 'Done!';
-      this.button.click();
-      this.getTodos().simulate('click');
-      this.input.value = 'Not Done!';
-      this.button.click();
+    this.complete.simulate('click');
+    expect(visibleTodos()).to.deep.equal(['Done!']);
+    expect(this.isSelected(this.all)).to.be.false;
+    expect(this.isSelected(this.incomplete)).to.be.false;
+    expect(this.isSelected(this.complete)).to.be.true;
 
-      this.complete.simulate('click');
-
-      expect(this.getTodos()).to.have.length(1);
-      expect(this.getTodos().at(0).text()).to.equal('Done!');
-      expect(this.isSelected(this.all)).to.be.false;
-      expect(this.isSelected(this.complete)).to.be.true;
-    });
-
-    it('filters to all todos', function () {
-      this.input.value = 'Done!';
-      this.button.click();
-      this.getTodos().simulate('click');
-      this.input.value = 'Not Done!';
-      this.button.click();
-
-      this.complete.simulate('click');
-      this.all.simulate('click');
-
-      expect(this.getTodos()).to.have.length(2);
-      expect(this.getTodos().at(0).text()).to.equal('Done!');
-      expect(this.getTodos().at(1).text()).to.equal('Not Done!');
-      expect(this.isSelected(this.all)).to.be.true;
-      expect(this.isSelected(this.complete)).to.be.false;
-      expect(this.isSelected(this.incomplete)).to.be.false;
-    });
+    this.all.simulate('click');
+    expect(visibleTodos()).to.deep.equal(['Done!', 'Not Done!']);
+    expect(this.isSelected(this.all)).to.be.true;
+    expect(this.isSelected(this.incomplete)).to.be.false;
+    expect(this.isSelected(this.complete)).to.be.false;
   });
 });

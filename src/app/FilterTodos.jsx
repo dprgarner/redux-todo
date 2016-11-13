@@ -26,7 +26,7 @@ const mapStateToProps = (state, ownProps) => ({
   selected: state.filter === ownProps.type,
 });
 
-let FilterTodo = ({dispatch, text, action, selected}) => {
+export let FilterTodo = ({dispatch, text, action, selected}) => {
   let liStyle = {
     display: 'inline-block',
     marginRight: '20px',
