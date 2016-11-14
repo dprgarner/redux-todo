@@ -14,7 +14,7 @@ export const Todo = ({text, onClick, completed}) => {
   )
 };
 
-const Todos = ({filter, todos, onTodoClick}) => (
+export const Todos = ({filter, todos, onTodoClick}) => (
   <ul>
     {
       todos.filter((todo) => (

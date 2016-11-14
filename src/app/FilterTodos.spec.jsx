@@ -14,18 +14,18 @@ const mockStore = (state) => ({
 });
 
 describe('FilterTodos', function () {
-  beforeEach(function () {
-    this.filterTodos = shallow(<FilterTodos />);
-  });
-
   it('mounts three FilterTodo tags', function () {
-    expect(this.filterTodos.find(FilterTodo)).to.have.length(3);
-    let props = _.map([0, 1, 2], (i) => (
-      this.filterTodos.find(FilterTodo).at(i).props()
-    ));
+    let filterTodos = shallow(
+      <FilterTodos />
+    );
+    expect(filterTodos.find(FilterTodo)).to.have.length(3);
 
-    for (let i = 0; i < 3; i++)
+    let props = _.map([0, 1, 2], (i) => (
+      filterTodos.find(FilterTodo).at(i).props()
+    ));
+    _.each([0, 1, 2], (i) => {
       expect(props[i]).to.have.keys('action', 'type', 'text');
+    });
 
     expect(props[0]).to.contain({
       type: FILTER_ALL,
