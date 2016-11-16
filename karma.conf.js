@@ -1,5 +1,4 @@
-// Karma configuration
-// Generated on Wed Sep 21 2016 20:24:16 GMT+0100 (GMT Daylight Time)
+var argv = require('minimist')(process.argv.slice(2));
 
 module.exports = function(config) {
   config.set({
@@ -8,11 +7,11 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'sinon-chai'],
 
     // list of files / patterns to load in the browser
     files: [
-      'src/test.js',
+      './import_tests.js',
     ],
 
     // list of files to exclude
@@ -22,7 +21,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/test.js': ['webpack'],
+      './import_tests.js': ['webpack'],
     },
 
     webpack: require('./webpack.conf.js').test(),
@@ -63,6 +62,13 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
-  })
-}
+    concurrency: Infinity,
+  });
+
+  if (argv.watch || argv.w) {
+    config.set({
+      autoWatch: true,
+      singleRun: false,
+    }); 
+  }
+};
