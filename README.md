@@ -1,7 +1,5 @@
-# react-redux-boilerplate
-React with ES6, Karma, Webpack dev server, etc.
+# A React/Redux todo app.
 
-------
 To start the Webpack auto-refreshing dev server:
 ```
 ./start [--open] <port>
